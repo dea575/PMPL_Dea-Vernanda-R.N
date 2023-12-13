@@ -59,4 +59,35 @@ describe('template spec', () => {
     cy.get('.table').should('not.contain', 'user baru');
 
   })
+  
+  it.only('user can delete data (Anothor Admin)', () => {
+  cy.get('.table td').contains('Anothor Admin').parent().find('button').contains('Delete').click();
+  //make sure swett alert visible
+  cy.get('.swal-button-container').find('button').contains('OK').click();
+  cy.get('.alert')
+    .should('be.visible')
+    .and('have.class', 'alert-success')
+    .contains('User Deleted Successfully')
+  ;
+  cy.get('.table').should('not.contain', 'Anothor Admin');
+})
+
+it.only('user can delete data (User Baru)', () => {
+  cy.get('.table td').contains('User baru').parent().find('button').contains('Delete').click();
+  //make sure swett alert visible
+  cy.get('.swal-button-container').find('button').contains('OK').click();
+  cy.get('.alert')
+    .should('be.visible')
+    .and('have.class', 'alert-success')
+    .contains('User Deleted Successfully')
+  ;
+  cy.get('.table').should('not.contain', 'User baru');
+})
+
+//negative test case
+it('dummy', () => {
+  //arrange
+  //act
+  //assert
+})
 })
