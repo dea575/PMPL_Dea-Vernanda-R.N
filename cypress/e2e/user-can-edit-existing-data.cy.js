@@ -27,3 +27,30 @@ it.only('User can edit existing data', () => {
   cy.get('.table td').contains('user').should('have.text','user edited')
   cy.get('.alert').should('be.visible').and('have.class', 'alert-success').and('contain', 'User Berhasil Diupdate')
 })
+
+it.only('User can edit existing data user baru', () => {
+  cy.get('.table td').contains('User baru').parent().find('a').contains('Edit').click();
+  cy.get('#name').clear('User bar');
+  cy.get('#name').type('User new');
+  cy.get('.btn-primary').contains('Submit').click();
+  cy.get('.table td').contains('User baru').should('have.text', 'User new');
+  cy.get(".alert")
+    .should("be.visible")
+    .and("have.class", "alert-success")
+    .and("contain", "User Berhasil Diupdate")
+  ;
+})
+//UTS
+it.only('User can edit existing data user', () => {
+  cy.get('.table td').contains('user').parent().find('a').contains('Edit').click();
+  //make sure swett alert visible
+  cy.get('#name').clear('user ');
+  cy.get('#name').type('user edited');
+  cy.get('.btn-primary').contains('Submit').click();
+  cy.get('.table td').contains('user').should('have.text', 'user edited');
+  cy.get(".alert")
+    .should("be.visible")
+    .and("have.class", "alert-success")
+    .and("contain", "User Berhasil Diupdate")
+    ;
+  })
